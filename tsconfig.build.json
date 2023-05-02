@@ -1,0 +1,23 @@
+{
+  // *
+  // * TSDX builds the JS into one big file, but we want clients to
+  // * be able to import individual files as well.
+  // *
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "**/*.test.ts",
+    "node_modules",
+    "test",
+    // * We exclude src/index.ts because tsdx builds that one.
+    "src/index.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "declaration": false, // * TSDX does compile types
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "sourceMap": false
+  }
+}

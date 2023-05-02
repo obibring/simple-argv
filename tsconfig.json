@@ -1,0 +1,29 @@
+{
+  "include": ["./src"],
+  "compilerOptions": {
+    "types": ["vitest/globals"],
+    "declaration": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "jsx": "react",
+    "lib": ["dom", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "rootDir": "./src",
+    "skipLibCheck": true,
+    "inlineSources": true,
+    "sourceMap": true,
+    "strict": true,
+    "stripInternal": true,
+    "target": "ES5",
+    "useUnknownInCatchVariables": false
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "name": "@obibring/tsdx-boilerplate",
+  "version": "0.0.0",
+  "module": "dist/tsdx-boilerplate.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/tsdx-boilerplate.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/tsdx-boilerplate.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "typings": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/obibring/tsdx-boilerplate.git"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^8.1.0",
+    "@typescript-eslint/eslint-plugin": "5.59.2",
+    "@typescript-eslint/parser": "5.59.2",
+    "eslint-config-prettier": "8.8.0",
+    "prettier": "2.8.8",
+    "size-limit": "^8.1.0",
+    "ts-toolbelt": "9.6.0",
+    "tsdx": "^0.14.1",
+    "tslib": "2.5.0",
+    "typescript": "5.0.4",
+    "vite": "4.3.4",
+    "vite-tsconfig-paths": "4.2.0",
+    "vitest": "0.30.1"
+  },
+  "engines": {
+    "node": "16.17.0"
+  },
+  "files": ["dist", "src"],
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "pnpm": {
+    "overrides": {
+      "@typescript-eslint/eslint-plugin": "$@typescript-eslint/eslint-plugin",
+      "@typescript-eslint/parser": "$@typescript-eslint/parser",
+      "prettier": "$prettier",
+      "typescript": "$typescript"
+    }
+  },
+  "overrides": {
+    "tsdx": {
+      "@typescript-eslint/eslint-plugin": "5.59.2",
+      "@typescript-eslint/parser": "5.59.2",
+      "typescript": "$typescript"
+    }
+  },
+  "resolutions": {
+    "@typescript-eslint/eslint-plugin": "$@typescript-eslint/eslint-plugin",
+    "@typescript-eslint/parser": "$@typescript-eslint/parser",
+    "prettier": "$prettier",
+    "typescript": "$typescript"
+  },
+  "scripts": {
+    "analyze": "size-limit --why",
+    "build": "tsdx build && tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist",
+    "clean:dist": "rm -rf dist",
+    "lint": "tsdx lint",
+    "prepare": "pnpm build",
+    "size": "size-limit",
+    "start": "tsdx watch",
+    "test": "vitest"
+  }
+}

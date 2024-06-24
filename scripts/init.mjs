@@ -185,10 +185,14 @@ try {
       const srcRoot = path.resolve(__dirname, "..", "src")
       const mainFileAbsolutePath = path.join(srcRoot, mainFileBasename)
       const indexFileAbsolutePath = path.join(srcRoot, "index.ts")
-      log.info(`Writing main file to "${mainFileAbsolutePath}".`)
-      fs.writeFileSync(mainFileAbsolutePath, `export default {}`, {
-        encoding: "utf-8",
-      })
+      if (fs.existsSync(mainFileAbsolutePath)) {
+        log.info(`Main file already exists. Not overwriting it..`)
+      } else {
+        log.info(`Writing main file to "${mainFileAbsolutePath}".`)
+        fs.writeFileSync(mainFileAbsolutePath, `export default {}`, {
+          encoding: "utf-8",
+        })
+      }
       log.info(`Updating ${indexFileAbsolutePath} to export from main file.`)
       fs.writeFileSync(
         indexFileAbsolutePath,

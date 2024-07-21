@@ -81,19 +81,19 @@ console.log(typeof decimal_num, decimal_num) // "number", -155.81
 
 ```
 
-### `getString()`
+### `getStr()`
 Returns the first valid string that matches one of the provided named arguments.
 Arguments names must start with `-` or `--`.
 
 ```ts
-import { getString } from "simple-argv";
+import { getStr } from "simple-argv";
 
 // Retrieves an optional string argument.
-const optional_name = getString("--name" /* or an array ["--name", "-n"] */)
+const optional_name = getStr("--name" /* or an array ["--name", "-n"] */)
 
 try {
   // Pass "required" to throw if the value is missing.
-  const mandatory_name = getString("--name", "required") // might throw
+  const mandatory_name = getStr("--name", "required") // might throw
 
   console.log(typeof mandatory_name) // "string"
 } catch {
@@ -115,6 +115,26 @@ const isProduction = getBool(["--production", "--prod", "-p"])
 // Pass a single argument name, `true` is returned if it was set.
 const isProduction = getBool("--production")
 
+```
+
+### `getArr()`
+Returns an array of all arguments matching the given argument names. Values wrapped in quotes are split by commas and combined with all other occurrences of the matching keys, then returned as an array of strings. When `required` is set to true, the array will always contain at least one element.
+Arguments names must start with `-` or `--`.
+
+```ts
+import { getArr } from "simple-argv";
+
+// Retrieves an optional string argument.
+const optional_name = getStr("--name" /* or an array ["--name", "-n"] */)
+
+try {
+  // Pass "required" to throw if the value is missing.
+  const mandatory_names = getArr("--name", "required") // might throw
+
+  console.log(mandatory_names) // ["bob"]
+} catch {
+  // --name argument not provided as a valid string.
+}
 ```
 
 ## Getting Started

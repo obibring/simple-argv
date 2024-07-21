@@ -1,6 +1,6 @@
 {
   "name": "ts-simple-argv",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "module": "dist/node-args.esm.js",
   "description": "Simple node utilities for parsing CLI arguments.",
   "keywords": ["node", "typescript", "cli"],

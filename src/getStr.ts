@@ -39,21 +39,25 @@ import { assertValidKeys, isNamedCLIArg, quoteWrapAndJoin } from "./_utils"
 export function getStr(
   argNameOrNames: string | string[],
   required?: undefined | "optional",
+  description?: string,
   argv?: ReadonlyArray<string>,
 ): string | undefined
 export function getStr(
   argNameOrNames: string | string[],
   required: "required",
+  description?: string,
   argv?: ReadonlyArray<string>,
 ): string
 export function getStr(
   argNameOrNames: string | string[],
   required?: "required" | "optional" | undefined,
+  description?: string,
   argv?: ReadonlyArray<string>,
 ): undefined | string
 export function getStr(
   argNameOrNames: string | string[],
   required?: undefined | "required" | "optional",
+  description?: string,
   _argv: ReadonlyArray<string> = process.argv,
 ): string | undefined {
   let argv = [..._argv]
@@ -89,10 +93,10 @@ export function getStr(
   if (required === "required") {
     const msg =
       typeof argNameOrNames === "string"
-        ? `Expected command line argument "${argNameOrNames}", but it wasn't set.`
+        ? `Expected command line argument "${argNameOrNames}", but it wasn't set. ${description}`
         : `Expected one of the following command line arguments, but none were provided: ${quoteWrapAndJoin(
             argNameOrNames,
-          )}.`
+          )}. ${description}`
     throw new Error(msg)
   }
   return undefined

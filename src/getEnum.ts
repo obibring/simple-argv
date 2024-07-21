@@ -26,31 +26,35 @@ export function getEnum<T extends string>(
   argNameOrNames: string | string[],
   allowedValues: ReadonlyArray<T>,
   onError?: undefined | "optional",
+  description?: string,
   argv?: ReadonlyArray<string>,
 ): T | undefined
 export function getEnum<T extends string>(
   argNameOrNames: string | string[],
   allowedValues: ReadonlyArray<T>,
   onError: "required",
+  description?: string,
   argv?: ReadonlyArray<string>,
 ): T
 export function getEnum<T extends string>(
   argNameOrNames: string | string[],
   allowedValues: ReadonlyArray<T>,
   onError?: "required" | undefined | "optional",
+  description?: string,
   argv?: ReadonlyArray<string>,
 ): undefined | T
 export function getEnum<T extends string>(
   argNameOrNames: string | string[],
   allowedValues: ReadonlyArray<T>,
   onError?: "required" | undefined | "optional",
+  description?: string,
   argv: ReadonlyArray<string> = process.argv,
 ): T | undefined {
   const names = Array.isArray(argNameOrNames)
     ? argNameOrNames
     : [argNameOrNames]
   assertValidKeys("getEnum()", names)
-  const value = getStr(argNameOrNames, onError, argv)
+  const value = getStr(argNameOrNames, onError, description, argv)
   const isAllowedValue = (value: string): value is T => {
     return allowedValues.includes(value as T)
   }
@@ -62,8 +66,10 @@ export function getEnum<T extends string>(
         typeof argNameOrNames === "string"
           ? `Expected CLI argument "${argNameOrNames}" to be one of: ${quoteWrapAndJoin(
               allowedValues,
-            )}, but got: "${value}"`
-          : `Expected CLI argument matching ${quoteWrapAndJoin(argNameOrNames)}`
+            )}, but got: "${value}". ${description}`
+          : `Expected CLI argument matching ${quoteWrapAndJoin(
+              argNameOrNames,
+            )}. ${description}`
       throw new Error(msg)
     }
   }

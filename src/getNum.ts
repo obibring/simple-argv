@@ -35,38 +35,42 @@ import { getStr } from "./getStr"
 export function getNum(
   argNameOrNames: string | string[],
   required?: undefined | "optional",
+  description?: string,
   argv?: ReadonlyArray<string>,
 ): number | undefined
 export function getNum(
   argNameOrNames: string | string[],
   required: "required",
+  description?: string,
   argv?: ReadonlyArray<string>,
 ): number
 export function getNum(
   argNameOrNames: string | string[],
   required?: "required" | "optional" | undefined,
+  description?: string,
   argv?: ReadonlyArray<string>,
 ): undefined | number
 export function getNum(
   argNameOrNames: string | string[],
   required?: undefined | "required" | "optional",
+  description?: string,
   argv: ReadonlyArray<string> = process.argv,
 ): number | undefined {
   const names = Array.isArray(argNameOrNames)
     ? argNameOrNames
     : [argNameOrNames]
   assertValidKeys("getNum()", names)
-  const value = getStr(argNameOrNames, required, argv)
+  const value = getStr(argNameOrNames, required, description, argv)
   if (value) {
     const num = parseFloat(value)
     if (isNaN(num)) {
       if (required === "required") {
         const msg =
           typeof argNameOrNames === "string"
-            ? `Expected CLI argument "${argNameOrNames}" to be a valid number, but got: "${value}"`
+            ? `Expected CLI argument "${argNameOrNames}" to be a valid number, but got: "${value}" ${description}`
             : `Expected CLI argument matching one of ${quoteWrapAndJoin(
                 argNameOrNames,
-              )} to be a valid number, but got "${value}".`
+              )} to be a valid number, but got "${value}". ${description}`
         throw new Error(msg)
       }
       return undefined
